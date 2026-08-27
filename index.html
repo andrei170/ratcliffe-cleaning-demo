@@ -1,0 +1,309 @@
+<title>Ratcliffe Cleaning Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14181c; --mut:#57616c; --line:#e2e6ec; --bg:#f8fafb; --panel:#fff;
+  --deep:#12283f; --deep2:#1d3b58; --acc:#2f6fbf; --acc2:#7fb4e3; --ok:#1f7a45;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Bitter,Georgia,serif;font-weight:700;line-height:1.16;letter-spacing:-.014em;text-wrap:balance}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.demobar{background:#0d1117;color:#e6edf3;font-size:12.5px;text-align:center;padding:8px 14px}
+.demobar b{color:#f0b13c}
+.urg{background:#8a1c1c;color:#fff;text-align:center;font-size:13.5px;padding:9px;font-weight:500}
+.urg a{color:#fff}
+nav{position:sticky;top:0;z-index:60;background:rgba(248,250,251,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.navin{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.logo{font-family:Bitter,serif;font-weight:700;font-size:19px}
+.logo span{color:var(--acc)}
+.navl{display:flex;gap:20px;font-size:14.5px;font-weight:500}
+.navl a{color:var(--mut);text-decoration:none}.navl a:hover{color:var(--deep2)}
+.navl a.on{color:var(--deep2);font-weight:700}
+.call{display:inline-flex;align-items:center;gap:8px;background:var(--deep2);color:#fff;text-decoration:none;font-weight:600;font-size:14.5px;padding:10px 17px;border-radius:8px;white-space:nowrap}
+@media(max-width:900px){.navl{display:none}}
+.hero{position:relative;background:linear-gradient(155deg,var(--deep),var(--deep2));color:#eef3f8;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;opacity:.13;
+  background:repeating-linear-gradient(78deg,transparent 0 38px,rgba(255,255,255,.55) 38px 40px),
+             repeating-linear-gradient(-12deg,transparent 0 38px,rgba(255,255,255,.3) 38px 39px)}
+.heroin{position:relative;z-index:2;display:grid;grid-template-columns:1.06fr .94fr;gap:42px;align-items:center;padding:56px 0 62px}
+@media(max-width:980px){.heroin{grid-template-columns:1fr;gap:28px;padding:38px 0 44px}}
+.eyeb{display:inline-block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--acc2);border:1px solid rgba(255,255,255,.28);padding:5px 12px;border-radius:999px;margin-bottom:17px}
+.hero h1{font-size:clamp(31px,5vw,48px);margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--acc2)}
+.hero .lede{font-size:17px;color:#c6d3df;max-width:520px}
+.ticks{list-style:none;margin-top:20px;display:grid;gap:9px}
+.ticks li{display:flex;gap:10px;font-size:15.5px;color:#dde6ee}
+.ticks svg{flex:0 0 18px;margin-top:4px;fill:var(--acc2)}
+.form{background:var(--panel);border-radius:14px;padding:24px;box-shadow:0 20px 54px rgba(0,0,0,.3);color:var(--ink)}
+.form h3{font-size:20px;margin-bottom:4px}
+.form .fs{font-size:13.5px;color:var(--mut);margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin:12px 0 5px}
+select,input{width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:#fbfcfd;border:1px solid var(--line);border-radius:8px;padding:11px 12px}
+select:focus,input:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+.chk{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chk label{display:inline-flex;align-items:center;gap:7px;margin:0;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fbfcfd;font-size:13.5px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.chk input{width:auto;padding:0;margin:0}
+.btn{width:100%;margin-top:18px;background:var(--acc);color:#fff;border:0;border-radius:9px;padding:14px;font-family:Bitter,serif;font-size:16px;font-weight:700;cursor:pointer}
+.btn:hover{filter:brightness(.88)}
+.hint{font-size:12px;color:var(--mut);margin-top:10px;text-align:center}
+.out{display:none;margin-top:15px;border-radius:10px;padding:15px 16px;font-size:14.5px;border:1px solid}
+.out.show{display:block}
+.out b{display:block;font-family:Bitter,serif;font-size:16.5px;margin-bottom:5px}
+.o-hi{background:#eef6f0;border-color:#bedcc6;color:#1d5734}
+.o-md{background:#fdf6ea;border-color:#ecdcb2;color:#775413}
+.o-lo{background:#f3f5f7;border-color:#dde2e7;color:#48515a}
+.o-urg{background:#fdeeee;border-color:#f0c6c4;color:#8a1c1c}
+.trust{background:#0e141a;color:#b6c2cd;padding:15px 0}
+.trustin{display:flex;flex-wrap:wrap;justify-content:center;gap:11px 34px;font-size:13.5px}
+.trustin b{color:var(--acc2);font-weight:700}
+section{padding:58px 0}
+.sh{text-align:center;max-width:680px;margin:0 auto 34px}
+.sh .kick{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:10px}
+.sh h2{font-size:clamp(25px,3.4vw,33px);margin-bottom:11px}
+.sh p{color:var(--mut);font-size:16.5px}
+.band{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:17px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.ctop{height:100px;position:relative;background:linear-gradient(140deg,var(--deep),var(--deep2))}
+.ctop::after{content:"";position:absolute;inset:0;opacity:.24;background:repeating-linear-gradient(78deg,transparent 0 15px,rgba(255,255,255,.5) 15px 16px)}
+.cbody{padding:17px}.cbody h3{font-size:18px;margin-bottom:6px}
+.cbody p{font-size:14.5px;color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:24px}
+.box.pri{background:linear-gradient(160deg,var(--deep),var(--deep2));color:#eef3f8;border-color:var(--deep2)}
+.box h3{font-size:20px;margin-bottom:10px}
+.box ul{margin:0 0 0 19px;font-size:15px;color:var(--mut)}
+.box.pri ul{color:#c6d3df}
+.box li{margin-bottom:8px}
+.tagp{display:inline-block;font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;background:var(--acc2);color:#0e1a26;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:16px}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.fact .k{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:7px}
+.fact .v{font-family:Bitter,serif;font-size:22px;font-weight:700;color:var(--deep2)}
+.fact .n{font-size:13.5px;color:var(--mut);margin-top:5px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:22px;counter-reset:s}
+.step{counter-increment:s;position:relative;padding-left:50px}
+.step::before{content:counter(s);position:absolute;left:0;top:0;width:37px;height:37px;border-radius:50%;background:var(--deep2);color:#fff;font-family:Bitter,serif;font-weight:700;font-size:17px;display:grid;place-items:center}
+.step h3{font-size:17.5px;margin-bottom:5px}.step p{font-size:14.5px;color:var(--mut)}
+.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:17px}
+.rev{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px}
+.stars{color:#e0a32e;font-size:15.5px;letter-spacing:2px}
+.rev p{font-size:14.8px;color:var(--mut);margin:9px 0 12px;font-style:italic}
+.rev .who{font-size:13.5px;font-weight:700}
+.rev .who span{display:block;font-weight:400;color:var(--mut);font-size:12.5px;margin-top:2px}
+.ratebar{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.ratebig{font-family:Bitter,serif;font-size:42px;font-weight:700;color:var(--deep2)}
+.ratetxt{font-size:14.5px;color:var(--mut);text-align:left}
+.badges{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.bdg{background:var(--panel);border:1px dashed #b9c3d1;border-radius:11px;padding:14px 20px;text-align:center;min-width:140px}
+.bdg b{display:block;font-family:Bitter,serif;font-size:16px;color:var(--deep2)}
+.bdg span{font-size:11.5px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase}
+.areas{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:20px}
+.areas span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;color:var(--mut)}
+.cta2{background:linear-gradient(155deg,var(--deep),var(--deep2));color:#eef3f8;text-align:center;padding:58px 0}
+.cta2 h2{font-size:clamp(25px,3.4vw,33px);margin-bottom:11px}
+.cta2 p{color:#c6d3df;font-size:16.5px;max-width:560px;margin:0 auto 22px}
+.cta2 .call{font-size:16px;padding:14px 26px;background:var(--acc2);color:#0e1a26}
+footer{background:#0b1016;color:#87929d;font-size:13.5px;padding:32px 0}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+footer h4{color:#e7edf3;font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:10px}
+footer a{color:#87929d;text-decoration:none;display:block;margin-bottom:6px}
+footer a:hover{color:var(--acc2)}
+.fnote{border-top:1px solid #1b232c;padding-top:18px;margin-top:20px;font-size:12.5px;color:#6b7681;line-height:1.65}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+<style>:root{--deep:#132318;--deep2:#244530;--acc:#2e7d4f;--acc2:#79cf9a}</style>
+
+<div class="demobar">CONCEPT DEMONSTRATION &mdash; built by <b>AG1 Consulting</b> for Wayne Ratcliffe &middot; not a live site &middot; instant prices shown are <b>illustrative placeholders</b></div>
+
+<nav><div class="wrap navin">
+  <div class="logo">Ratcliffe <span>Cleaning</span></div>
+  <div class="navl"><a href="#quote">Instant Quote</a><a href="#work">Services</a><a href="#plan">Regular Rounds</a><a href="#areas">Areas</a></div>
+  <a class="call" href="tel:07894125325">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+    07894 125325</a>
+</div></nav>
+
+<div class="hero" id="quote"><div class="wrap heroin">
+  <div>
+    <div class="eyeb">Atherton &middot; Wigan &middot; Greater Manchester</div>
+    <h1>Your price on screen. <em>Book it yourself.</em></h1>
+    <p class="lede">Fifteen years of exterior cleaning across Greater Manchester &mdash; windows,
+    gutters, uPVC, driveways, render and roofs. Get a price in twenty seconds and pick a date
+    without waiting for anyone to ring you back.</p>
+    <ul class="ticks">
+      <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> 5.0 from 48 Google reviews</li>
+      <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Card payments accepted</li>
+      <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Weekly, monthly or six-weekly rounds</li>
+    </ul>
+  </div>
+
+  <div class="form">
+    <h3>Price it now</h3>
+    <div class="fs">Three questions. The number appears on screen &mdash; no waiting for a call back.</div>
+    <form onsubmit="return q(event)">
+      <label for="svc">What needs cleaning?</label>
+      <select id="svc" required>
+        <option value="">Choose one&hellip;</option>
+        <option value="win">Windows</option>
+        <option value="gut">Gutters</option>
+        <option value="upvc">uPVC, fascias and soffits</option>
+        <option value="drive">Driveway or patio</option>
+        <option value="roof">Roof or render</option>
+        <option value="full">Full exterior clean</option>
+      </select>
+      <label for="size">Property size</label>
+      <select id="size" required>
+        <option value="">Choose one&hellip;</option>
+        <option value="1">Flat, bungalow or terrace</option>
+        <option value="2">Semi-detached</option>
+        <option value="3">Detached</option>
+        <option value="4">Large detached or commercial</option>
+      </select>
+      <label for="freq">How often?</label>
+      <select id="freq" required>
+        <option value="">Choose one&hellip;</option>
+        <option value="w">Every 4 weeks</option>
+        <option value="s">Every 6&ndash;8 weeks</option>
+        <option value="y">Twice a year</option>
+        <option value="o">One-off</option>
+      </select>
+      <label for="pc">Postcode</label>
+      <input id="pc" type="text" placeholder="e.g. M46 9AB" required>
+      <button class="btn" type="submit">Get my price</button>
+      <div class="hint">Demonstration only &mdash; prices are illustrative and nothing is sent anywhere</div>
+      <div class="out" id="out"></div>
+    </form>
+  </div>
+</div></div>
+
+<div class="trust"><div class="wrap trustin">
+  <div><b>15+ years</b> established</div><div><b>5.0</b> from 48 reviews</div>
+  <div><b>Card</b> payments</div><div><b>Fully</b> insured</div>
+</div></div>
+
+<section id="plan"><div class="wrap">
+  <div class="sh"><div class="kick">The Part That Saves Wayne Twenty Hours</div>
+    <h2>Regular customers who look after themselves</h2>
+    <p>This is the section that matters most. Everything below happens without anyone typing a
+    message, chasing a payment or checking a calendar.</p></div>
+  <div class="two">
+    <div class="box pri">
+      <div class="tagp">On a round</div>
+      <h3>What the customer gets</h3>
+      <ul>
+        <li>A text two days before every visit, automatically</li>
+        <li>A card on file, charged after the clean &mdash; nothing to remember</li>
+        <li>Skip or move a visit from the same text, without ringing</li>
+        <li>The same cleaner, the same day of the month</li>
+        <li>A receipt by email, straight away</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>What it removes from your week</h3>
+      <ul>
+        <li>Reminding people their six-week clean is due</li>
+        <li>Chasing payment after the visit</li>
+        <li>Retyping the same quote for the twentieth driveway</li>
+        <li>Answering the phone while you are up a ladder</li>
+        <li>Rebuilding the schedule every time it rains</li>
+        <li>Following up quotes nobody replied to</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<div class="band"><section id="work"><div class="wrap">
+  <div class="sh"><div class="kick">What We Do</div><h2>Everything on the outside of a property</h2></div>
+  <div class="cards">
+    <div class="card"><div class="ctop"></div><div class="cbody"><h3>Window Cleaning</h3>
+      <p>Weekly, monthly or six-weekly. Frames and sills included.</p></div></div>
+    <div class="card"><div class="ctop"></div><div class="cbody"><h3>Gutters &amp; uPVC</h3>
+      <p>Gutters, fascias, soffits, cladding and conservatories.</p></div></div>
+    <div class="card"><div class="ctop"></div><div class="cbody"><h3>Driveways &amp; Patios</h3>
+      <p>Block paving, stone and decking pressure washed and re-sanded.</p></div></div>
+    <div class="card"><div class="ctop"></div><div class="cbody"><h3>Roof &amp; Render</h3>
+      <p>Soft-wash roof cleaning, render cleaning, graffiti and gum removal.</p></div></div>
+  </div>
+</div></section></div>
+
+<section><div class="wrap">
+  <div class="sh"><div class="kick">Reviews</div><h2>Fifteen years, and not a bad word</h2></div>
+  <div class="ratebar">
+    <div class="ratebig">5.0</div>
+    <div class="ratetxt"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <b>48 Google reviews</b> &mdash; as publicly reported</div>
+  </div>
+  <div class="revs">
+    <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;Placeholder. Your real Google reviews would sit here with a date and a verified profile
+      beside each one.&rdquo;</p>
+      <div class="who">Placeholder <span>Example only &mdash; not a real review</span></div></div>
+    <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;Placeholder. A 5.0 from 48 is elite for this trade &mdash; it should be on every page,
+      not just one.&rdquo;</p>
+      <div class="who">Placeholder <span>Example only &mdash; not a real review</span></div></div>
+    <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;Placeholder. The rating is the single strongest asset the business has.&rdquo;</p>
+      <div class="who">Placeholder <span>Example only &mdash; not a real review</span></div></div>
+  </div>
+</div></section>
+
+<div class="band"><section id="areas"><div class="wrap">
+  <div class="sh"><div class="kick">Where We Work</div><h2>Greater Manchester and Lancashire</h2></div>
+  <div class="areas">
+    <span>Atherton</span><span>Wigan</span><span>Leigh</span><span>Glazebury</span><span>Tyldesley</span>
+    <span>Bolton</span><span>Astley</span><span>Golborne</span><span>Culcheth</span><span>Worsley</span>
+    <span>Hindley</span><span>Westhoughton</span>
+  </div>
+</div></section></div>
+
+<div class="cta2"><div class="wrap">
+  <h2>Get your price without ringing anyone</h2>
+  <p>Twenty seconds for a number, and a date in the diary before you close the tab.</p>
+  <a class="call" href="tel:07894125325">Or call 07894 125325</a>
+</div></div>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><h4>Ratcliffe Cleaning Services</h4><p style="margin-bottom:8px">Atherton, Greater Manchester</p><a href="tel:07894125325">07894 125325</a></div>
+    <div><h4>Services</h4><a href="#work">Window cleaning</a><a href="#work">Gutters &amp; uPVC</a><a href="#work">Driveways</a><a href="#work">Roof &amp; render</a></div>
+    <div><h4>Areas</h4><a href="#areas">Atherton</a><a href="#areas">Wigan</a><a href="#areas">Leigh</a></div>
+    <div><h4>Regular rounds</h4><a href="#plan">How it works</a><a href="#quote">Instant quote</a></div>
+  </div>
+  <div class="fnote">
+    <b>This is a concept demonstration built by AG1 Consulting for Wayne Ratcliffe on 27 August 2026.
+    It is not a live website and is not affiliated with or published by Ratcliffe Cleaning Services.</b>
+    <b>All prices produced by the quote tool are illustrative placeholders generated by a simple
+    front-end script. They are not real prices, not a quotation, and not an offer.</b> All three review
+    cards are labelled placeholders and are <b>not real reviews</b>; the 5.0 rating and 48 review count
+    are as publicly reported on 27 August 2026 and were not verified with the platform directly.
+    Business name, phone number, services and areas are taken from ratcliffecleaningservices.co.uk;
+    trading history and card payments are your own published claims. <b>The automated reminder, booking
+    and payment features shown describe what such a system could do and are not a statement that they
+    are currently in place</b>, and no claim about insurance is made beyond what your site publishes.
+    Both forms are front-end demonstrations: they send nothing, store nothing and contact nobody.
+  </div>
+</div></footer>
+
+<script>
+function q(e){e.preventDefault();
+ var sv=document.getElementById('svc').value,sz=+document.getElementById('size').value,
+     fr=document.getElementById('freq').value,pc=document.getElementById('pc').value.trim().toUpperCase(),
+     o=document.getElementById('out');
+ var base={win:12,gut:55,upvc:90,drive:150,roof:280,full:320};
+ var p=Math.round(base[sv]*(0.7+sz*0.25));
+ var per={w:'every 4 weeks',s:'every 6-8 weeks',y:'twice a year',o:'one-off'}[fr];
+ var near=/^(M|WN|BL|WA|PR|OL)/.test(pc);
+ var area=near?'':'<br><br>That postcode sits outside our usual Greater Manchester patch &mdash; we would tell you honestly rather than quote for a trip we would not make.';
+ var recur=(fr==='w'||fr==='s');
+ if(recur){o.className='out show o-hi';
+  o.innerHTML='<b>&pound;'+p+' &mdash; '+per+'</b>Illustrative only. On a regular round you would get a text two days before each visit, pay by card automatically afterwards, and be able to move a date from that same text. <b style="display:inline">Nobody has to ring anybody.</b>'+area;}
+ else if(sv==='roof'||sv==='full'||sz>=3){o.className='out show o-md';
+  o.innerHTML='<b>&pound;'+p+' &mdash; '+per+'</b>Illustrative only. Bigger jobs like this we would confirm on site before booking, but you have a realistic number now rather than waiting two days for a call back.'+area;}
+ else{o.className='out show o-md';
+  o.innerHTML='<b>&pound;'+p+' &mdash; '+per+'</b>Illustrative only. You could book a date from here without speaking to anyone &mdash; and if you would rather talk it through, the number is at the top.'+area;}
+ o.scrollIntoView({behavior:'smooth',block:'nearest'});return false;}
+</script>
